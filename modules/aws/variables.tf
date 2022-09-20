@@ -27,11 +27,6 @@ variable "public_subnet_ids" {
   type        = list(string)
 }
 
-# variable "allow_cidr_blocks_to_workers" {
-#   description = "IP addresses to allow connection to tailscale workers"
-#   type        = list(string)
-# }
-
 variable "additional_tags" {
   description = "List of tags for tailscale resources"
   default     = {}
@@ -40,5 +35,34 @@ variable "additional_tags" {
 
 variable "tailscale_authkey" {
   description = "TailScale Auth Key"
+  type        = string
+}
+
+variable "hostname" {
+  description = "TailScale Hostname Machine"
+  type        = string
+  default     = "aws-t4g-micro"
+}
+
+variable "enable_tailscale_ssh" {
+  description = "Enable Tailscale ssh on the node"
+  type        = bool
+  default     = true
+
+}
+
+variable "advertise_routes" {
+  description = "routes to advertise to other nodes (comma-separated, e.g. '10.0.0.0/8,192.168.0.0/24') or empty string to not advertise routes"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "Instance type to use for the instance."
+  default     = "t4g.micro"
+  type        = string
+}
+
+variable "spot_price" {
+  description = "The maximum price to request on the spot market."
   type        = string
 }
